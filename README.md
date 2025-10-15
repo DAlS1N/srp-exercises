@@ -1,18 +1,18 @@
-#Exercício 1 — Sistema de Notas Escolares
-Violações de SRP:
+Exercício 1 — Sistema de Notas Escolares
+Violações de SRP
 
-A classe Boletim possui várias responsabilidades:
+A classe Boletim realiza múltiplas tarefas:
 
-Gerenciar notas e calcular média.
+Gerencia notas e calcula média
 
-Gerar a situação do aluno (“Aprovado” ou “Reprovado”).
+Gera situação (Aprovado/Reprovado)
 
-Salvar boletim em arquivo.
+Salva boletim em arquivo
 
-Enviar boletim por e-mail.
+Envia boletim por e-mail
 
-Refatoração:
-// Responsável por armazenar notas e calcular média
+Refatoração
+// Classe principal
 public class Boletim {
     private String nomeAluno;
     private List<Double> notas = new ArrayList<>();
@@ -34,7 +34,7 @@ public class Boletim {
     }
 }
 
-// Responsável por gerar situação
+// Classe responsável pela avaliação
 public class Avaliador {
     public String gerarSituacao(Boletim boletim) {
         double media = boletim.calcularMedia();
@@ -42,7 +42,7 @@ public class Avaliador {
     }
 }
 
-// Responsável por salvar boletim em arquivo
+// Classe responsável por salvar o boletim
 public class BoletimFileSaver {
     public void salvar(Boletim boletim) throws IOException {
         try (FileWriter writer = new FileWriter(boletim.getNomeAluno() + "_boletim.txt")) {
@@ -51,17 +51,17 @@ public class BoletimFileSaver {
     }
 }
 
-// Responsável por enviar boletim por e-mail
+// Classe responsável por enviar e-mail
 public class BoletimEmailService {
     public void enviar(String email, Boletim boletim) {
         System.out.println("Enviando boletim do aluno " + boletim.getNomeAluno() + " para " + email);
     }
 }
 
-Benefícios:
+Benefícios
 
-Alterações em uma parte do código não afetam as outras.
+Alterações em uma parte do sistema não impactam outras.
 
-Maior facilidade de manutenção e teste.
+Maior clareza e facilidade de manutenção.
 
-Reutilização das classes em outros contextos.
+Classes reutilizáveis e testáveis.
